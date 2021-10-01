@@ -37,9 +37,4 @@ variable "common_tags" {
   type = map(string)
 }
 
-variable "core_product" {
-  type    = string
-  default = "ccpay"
-}
-
 
