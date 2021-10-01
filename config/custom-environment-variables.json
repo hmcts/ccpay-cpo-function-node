@@ -8,7 +8,7 @@
   "microserviceCcpayCpoFunction": "MICROSERVICE_CCPAY_CPO_FUNCTION",
   "secrets": {
     "ccpay": {
-      "ccpay_cpo-s2s-secret": "S2S_KEY_CCPAY_CPO_FUNCTION"
+      "ccpay-cpo-s2s-secret": "S2S_KEY_CCPAY_CPO_FUNCTION"
     }
   }
 }
