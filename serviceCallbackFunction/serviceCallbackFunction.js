@@ -25,9 +25,12 @@ const MAX_RETRIES = 3;
 
 module.exports = async function serviceCallbackFunction() {
     console.log("process started ...")
-    console.log("conect :" + connectionString);
+    console.log("connection string :" + connectionString);
     console.log("topic :" + topicName);
     console.log("subs:" + subscriptionName);
+    console.log("s2sUrl : " + s2sUrl);
+    console.log("s2sSecret :" + s2sSecret);
+    console.log("clientIdName :" + clientIdName);
     const sbClient = ServiceBusClient.createFromConnectionString(connectionString);
     const subscriptionClient = sbClient.createSubscriptionClient(topicName, subscriptionName);
     const receiver = subscriptionClient.createReceiver(ReceiveMode.peekLock);
@@ -55,14 +58,10 @@ module.exports = async function serviceCallbackFunction() {
             .send(idamUserName);
             
             var responseNew = JSON.stringify(userAuthToken);
-            console.log("res1:" + responseNew);
             var responseNew1 = JSON.parse(responseNew);
-            console.log("res2:" + responseNew1);
-            console.log("res3:" + responseNew1.status);
-            console.log("res4:" + responseNew1.text);
-            var responseNew2 = JSON.stringify(responseNew1.text)
-            var responseNew3 = JSON.parse(responseNew2)
-            console.log("res5:" + responseNew3.access_token);
+            var extractAccessToken = JSON.parse(responseNew1.text);
+            var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
+            console.log("userAuthrisationToken:" + userAuthrisationToken );
 
        /*  Get the user authorization token  -ends here  */
 
@@ -88,9 +87,11 @@ module.exports = async function serviceCallbackFunction() {
                     json: true
                 }).then(token => {
                     console.log('S2S Token Retrieved.......');
-                    const serviceResponse  = s2sRequest.put({
-                        uri: serviceCallbackUrl,
+                    var serviceCallbackUrl1 = "http://cpo-case-payment-orders-api-demo.service.core-compute-demo.internal/case-payment-orders";
+                    const serviceResponse  = s2sRequest.post({
+                        uri: serviceCallbackUrl1,
                         headers: {
+                            Authorization: 'Bearer ' + userAuthrisationToken,
                             ServiceAuthorization: token,
                             'Content-Type': 'application/json'
                         },
@@ -144,7 +145,8 @@ validateMessage = message => {
     if (!message.body) {
         console.log('No body received');
         return false;
-    } else {
+    } 
+    else {
         console.log('Received callback message: ', message.body);
     }
     if (!message.userProperties) {

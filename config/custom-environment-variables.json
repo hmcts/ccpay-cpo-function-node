@@ -1,14 +1,22 @@
 {
-  "servicecallbackBusConnection": "SERVICE_CALLBACK_BUS_CONNECTION",
-  "servicecallbackSubscriptionName": "SERVICE_CALLBACK_SUBSCRIPTION",
-  "processMessagesCount": "PROCESS_MESSAGES_COUNT",
-  "appInsightsInstumentationKey": "APPINSIGHTS_INSTRUMENTATIONKEY",
-  "delayMessageMinutes": "DELAY_MESSAGE_MINUTES",
+  "servicecallbackTopicName": "ccpay-cpo-topic",
+  "servicecallbackBusConnection": "cpo-topic-primary-send-listen-shared-access-key",
+  "servicecallbackSubscriptionName": "defaultServiceCallbackSubscription",
+  "processMessagesCount": "10",
+  "appInsightsInstumentationKey": "124e39c3-6dad-49ef-aede-d2cddac865c2",
+  "delayMessageMinutes": "30",
+  "userAuthrizatoinUrl" : "USER_AUTH_URL",
   "s2sUrl": "S2S_URL",
-  "microserviceCcpayCpoFunction": "MICROSERVICE_CCPAY_CPO_FUNCTION",
+  "microserviceCcpayCpoApp": "ccpay_cpo_function_node",
+  "clientIdName" : "ccpay-cpo-client-id",
+  "clientSecretName" : "ccpay-cpo-client-secret",
+  "grantTypePassword" : "password",
+  "userName" : "ccpay-cpo-user-id",
+  "userPassword" : "ccpay-cpo-user-password",
+  "userScope" : "openid profile roles",
   "secrets": {
     "ccpay": {
-      "ccpay-cpo-s2s-secret": "S2S_KEY_CCPAY_CPO_FUNCTION"
+      "ccpay_cpo_s2s_secret": "ccpay-cpo-s2s-secret"
     }
   }
 }
