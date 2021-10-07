@@ -26,7 +26,7 @@ data "azurerm_key_vault_secret" "s2s_secret" {
 }
 
 resource "azurerm_key_vault_secret" "ccpay_cpo_s2s_secret" {
-  name          = "ccpay_cpo-s2s-secret"
+  name          = "ccpay-cpo-s2s-secret"
   value         = data.azurerm_key_vault_secret.s2s_secret.value
   key_vault_id  = data.azurerm_key_vault.ccpay_cpo_key_vault.id
 }
