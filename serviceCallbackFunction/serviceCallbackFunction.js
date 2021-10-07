@@ -63,7 +63,7 @@ module.exports = async function serviceCallbackFunction() {
             var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
             console.log("userAuthrisationToken:" + userAuthrisationToken );
 
-       /*  Get the user authorization token  -ends here  */
+       /*  Get the user authorization token  -ends here   */
 
     }
     for (let i = 0; i < messages.length; i++) {
