@@ -1,0 +1,22 @@
+{
+    "servicecallbackTopicName": "ccpay-cpo-topic",
+    "servicecallbackBusConnection": "dummy",
+    "servicecallbackSubscriptionName": "defaultServiceCallbackSubscription",
+    "processMessagesCount": 10,
+    "appInsightsInstumentationKey": "124e39c3-6dad-49ef-aede-d2cddac865c2",
+    "delayMessageMinutes": 30,
+    "userAuthrizatoinUrl" : "https://idam-api.demo.platform.hmcts.net/o/token",
+    "s2sUrl": "http://rpe-service-auth-provider-demo.service.core-compute-demo.internal",
+    "microserviceCcpayCpoApp": "ccpay_function_node_app",
+    "clientIdName" : "ccpay-cpo-function-node",
+    "clientSecretName" : "dummy",
+    "grantTypePassword" : "password",
+    "userName" : "test@hmcts.net",
+    "userPassword" : "dummy",
+    "userScope" : "openid profile roles",
+    "secrets": {
+      "ccpay": {
+        "ccpay_cpo_s2s_secret": "dummy"
+      }
+    }
+  }
