@@ -125,7 +125,7 @@ module.exports = async function serviceCallbackFunction() {
                         headers: {
                             ServiceAuthorization: token,
                             Authorization: 'Bearer ' + userAuthrisationToken,
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json' 
                         },
                         json: true,
                         body: msg.body
