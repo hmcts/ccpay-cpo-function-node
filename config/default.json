@@ -16,7 +16,7 @@
   "userScope" : "dummy",
   "secrets": {
     "ccpay": {
-      "ccpay_cpo_s2s_secret": "dummy"
+      "ccpay_cpo_s2s_secret": "dummy" 
     }
   }
 }
