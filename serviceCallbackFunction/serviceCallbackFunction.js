@@ -58,6 +58,7 @@ module.exports = async function serviceCallbackFunction() {
         //     console.log("res:" + res)
         //     console.log("response:" + JSON.stringify(res))
         //     userAuthToken = res.body;
+        //
         //    })
 
            const rp = require('request-promise');
