@@ -9,8 +9,8 @@ properties([
         ])
 ])
 
-def product = "ccpay-cpo-function"
-def component = "node"
+def product = "ccpay"
+def component = "cpo-callback-function"
 def environment = params.ENVIRONMENT
 def subscription = 'sandbox'
 
