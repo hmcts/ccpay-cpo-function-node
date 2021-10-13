@@ -36,7 +36,7 @@ module.exports = async function serviceCallbackFunction() {
 
     else {
 
-        /*  Get the user authorization token  -starts here */
+        /*  Get the user authorization token  -starts here  */
 
         //    var clientId = 'client_id=' + clientIdName ;
         //    var clientSecret = 'client_secret=' + clientSecretName;
