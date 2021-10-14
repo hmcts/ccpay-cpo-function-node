@@ -1,0 +1,22 @@
+{
+  "servicecallbackTopicName": "ccpay-cpo-topic",
+  "servicecallbackBusConnection": "test-fp.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=pQjwhM2tr42puH4zNwGBImegvQ8Tqbwwg0N5RBQKrqk=",
+  "servicecallbackSubscriptionName": "dummy",
+  "processMessagesCount": 10,
+  "appInsightsInstumentationKey": "dummy",
+  "delayMessageMinutes": 30,
+  "userAuthrizatoinUrl" : "https://idam-api.demo.platform.hmcts.net/o/token",
+  "s2sUrl": "http://rpe-service-auth-provider-demo.service.core-compute-demo.internal",
+  "microserviceCcpayCpoApp": "dummy",
+  "clientIdName" : "dummy",
+  "clientSecretName" : "dummy",
+  "grantTypePassword" : "dummy",
+  "userName" : "dummy",
+  "userPassword" : "dummy",
+  "userScope" : "dummy",
+  "secrets": {
+    "ccpay": {
+      "ccpay_cpo_s2s_secret": "dummy" 
+    }
+  }
+}

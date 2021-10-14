@@ -1,8 +1,3 @@
-variable "product" {
-  type    = string
-  default = "ccpay"
-}
-
 variable "core_product" {
   type    = string
   default = "ccpay"
@@ -27,6 +22,10 @@ variable "location" {
 
 variable "env" {
   type = string
+}
+variable "product" {
+  type    = string
+  default = "ccpay"
 }
 
 variable "subscription" {

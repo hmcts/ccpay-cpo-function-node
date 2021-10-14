@@ -5,6 +5,8 @@ let serviceCallbackFunction = require('../serviceCallbackFunction/serviceCallbac
 
 let request = require('superagent');
 let s2sRequest = require('request-promise-native');
+const rp = require('request-promise')
+
 
 const sandbox = require('sinon').createSandbox();
 let chai = require('chai');
@@ -14,10 +16,12 @@ let sinonChai = require('sinon-chai');
 chai.use(sinonChai);
 
 let messages, loggerStub;
+
 beforeEach(function () {
     console = {
         log: sandbox.stub()
     }
+ 
 
     const sbClientStub = {
         createSubscriptionClient: sandbox.stub().returnsThis(),
@@ -42,17 +46,27 @@ describe("When messages are received", function () {
                 retries: 0,
                 serviceCallbackUrl: 'www.example.com'
             },
+            
             complete: sandbox.stub(),
             clone: sandbox.stub()
         }];
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode":200}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 200, "token":"12345"});
+        
+
+        
+    });
+
+    afterEach(function () {
+        sandbox.restore();
     });
 
     it('the desired url is called back', async function () {
 
         await serviceCallbackFunction();
-        expect(s2sRequest.post).to.have.been.calledOnce;
+
+        //expect(Requestauth.post).to.have.been.calledOnce; 
         expect(s2sRequest.put).to.have.been.calledOnce;
         expect(messages[0].complete).to.have.been.called;
     });
@@ -71,6 +85,7 @@ describe("When received message has no callback url", function () {
             clone: sandbox.stub(),
             deadLetter: sandbox.stub().rejects()
         }];
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
     });
 
     it('if there is no callback url and error is logged and no url is called back', async function () {
@@ -84,6 +99,7 @@ describe("When no message recieved", function () {
     before(function () {
         messages = [];
     });
+
 
     it('if there is no message, an info is logged', async function () {
         await serviceCallbackFunction();
@@ -100,6 +116,7 @@ describe("When no body recieved", function () {
             deadLetter: sandbox.stub(),
         }
         ];
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
     });
 
     it('if there is no body, an error is logged', async function () {
@@ -118,6 +135,7 @@ describe("When no userproperties recieved", function () {
             complete: sandbox.stub(),
             deadLetter: sandbox.stub()
         }];
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
     });
 
     it('if there is no body, an error is logged', async function () {
@@ -130,6 +148,7 @@ describe("When no userproperties recieved", function () {
 describe("When serviceCallbackUrl returns success, s2sToken not received", function () {
     before(function () {
         //request.send = sandbox.stub().returns({ "status": 200 });
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode":200}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 500, "message" : "S2SToken Failed"});
         messages = [{
@@ -154,6 +173,7 @@ describe("When serviceCallbackUrl returns success, s2sToken not received", funct
 
 describe("When serviceCallbackUrl returns error, deadletter success", function () {
     before(function () {
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode":500}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 200, "token":"12345"});
         messages = [{
@@ -180,6 +200,7 @@ describe("When serviceCallbackUrl returns error, deadletter success", function (
 
 describe("When serviceCallbackUrl returns error, deadletter success", function () {
     before(function () {
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode":500}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 200, "token":"12345"});
         messages = [{
@@ -207,6 +228,7 @@ describe("When serviceCallbackUrl returns error, deadletter success", function (
 
 describe("When serviceCallbackUrl returns error, deadletter fails", function () {
     before(function () {
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode" : 500}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 200, "token":"12345"});
         messages = [{
@@ -231,6 +253,7 @@ describe("When serviceCallbackUrl returns error, deadletter fails", function () 
 
 describe("When serviceCallbackUrl returns error, deadletter fails", function () {
     before(function () {
+        sandbox.stub(rp, 'post').resolves({"status" : 200, "res":  "{\"access_token\":\"eyJyXA\"}"});
         sandbox.stub(s2sRequest, 'put').yields(null, {"statusCode" : 500}, null);
         sandbox.stub(s2sRequest, 'post').resolves({"status" : 200, "token":"12345"});
         messages = [{
