@@ -24,7 +24,7 @@ dependencies:
   - name: function
     version: 0.1.2-beta
     repository: '@hmctspublic'
-  - name: servicebus
-    version: 0.3.0
-    repository: '@hmctspublic'
-    condition: servicebus.enabled
+#  - name: servicebus
+#    version: 0.3.0
+#    repository: '@hmctspublic'
+#    condition: servicebus.enabled
