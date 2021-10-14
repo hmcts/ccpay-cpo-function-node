@@ -36,31 +36,9 @@ module.exports = async function serviceCallbackFunction() {
 
     else {
 
-        /*  Get the user authorization token  -starts here   */
-
-        //    var clientId = 'client_id=' + clientIdName ;
-        //    var clientSecret = 'client_secret=' + clientSecretName;
-        //    var grantType = 'grant_type=' + grantTypePassword;
-        //    var idamUserName = 'username=' + userName;
-        //    var idamUserPassword = 'password=' + userPassword;
-        //    var idamScope = 'scope=' + userScope;
+    
            console.log("idamUserAuthrizatoinUrl: " + idamUserAuthrizatoinUrl);
            var userAuthToken;
-
-        //     var respo =  await request.post(idamUserAuthrizatoinUrl).set('Content-Type', 'application/x-www-form-urlencoded')
-        //    .send(clientId)
-        //    .send(clientSecret )
-        //    .send(grantType)
-        //    .send(idamUserPassword )
-        //    .send(idamScope)
-        //    .send(idamUserName).then ( res => {
-
-        //     console.log("res:" + res)
-        //     console.log("response:" + JSON.stringify(res))
-        //     userAuthToken = res.body;
-        //
-        //    })
-
            const rp = require('request-promise');
             var repo = await rp.post(idamUserAuthrizatoinUrl, {
                 form: {
@@ -89,7 +67,6 @@ module.exports = async function serviceCallbackFunction() {
            console.log(JSON.stringify(userAuthToken))
            
            var responseNew = JSON.stringify(userAuthToken);
-           var responseNew1 = JSON.parse(responseNew);
            var extractAccessToken = JSON.parse(responseNew);
            var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
            console.log("userAuthrisationToken:" + userAuthrisationToken );
