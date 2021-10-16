@@ -13,6 +13,7 @@ const delayTime = config.get('delayMessageMinutes');
 const s2sUrl = config.get('s2sUrl');
 const s2sSecret = config.get('secrets.ccpay.ccpay_cpo_s2s_secret');
 const microService = config.get('microserviceCcpayCpoApp');
+
 const idamUserAuthrizatoinUrl = config.get('userAuthrizatoinUrl');
 const clientIdName = config.get('clientIdName');
 const clientSecretName = config.get('clientSecretName');
@@ -24,52 +25,62 @@ const userScope = config.get('userScope');
 const MAX_RETRIES = 3;
 
 module.exports = async function serviceCallbackFunction() {
-    console.log("process started ...")
-    console.log("connection string :" + connectionString);
-    console.log("topic :" + topicName);
-    console.log("subs:" + subscriptionName);
-    console.log("s2sUrl : " + s2sUrl);
-    console.log("s2sSecret :" + s2sSecret);
-    console.log("clientIdName :" + clientIdName);
     const sbClient = ServiceBusClient.createFromConnectionString(connectionString);
     const subscriptionClient = sbClient.createSubscriptionClient(topicName, subscriptionName);
     const receiver = subscriptionClient.createReceiver(ReceiveMode.peekLock);
     const messages = await receiver.receiveMessages(processMessagesCount);
     if (messages.length == 0) {
         console.log('no messages received from ServiceBusTopic!!!');
-    } else {
-
-         /*  Get the user authorization token  -starts here */
-
-            var clientId = 'client_id=' + clientIdName ;
-            var clientSecret = 'client_secret=' + clientSecretName;
-            var grantType = 'grant_type=' + grantTypePassword
-            var idamUserName = 'username=' + userName
-            var idamUserPassword = 'password=' + userPassword
-            var idamScope = 'scope=' + userScope
-            console.log("idamUserAuthrizatoinUrl: " + idamUserAuthrizatoinUrl);
-
-            const userAuthToken = await request.post(idamUserAuthrizatoinUrl).set('Content-Type', 'application/x-www-form-urlencoded')
-            .send(clientId)
-            .send(clientSecret )
-            .send(grantType)
-            .send(idamUserPassword )
-            .send(idamScope)
-            .send(idamUserName);
-            
-            var responseNew = JSON.stringify(userAuthToken);
-            var responseNew1 = JSON.parse(responseNew);
-            var extractAccessToken = JSON.parse(responseNew1.text);
-            var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
-            console.log("userAuthrisationToken:" + userAuthrisationToken );
-
-       /*  Get the user authorization token  -ends here   test */
-
     }
+
+
+    else {
+
+    
+           console.log("idamUserAuthrizatoinUrl: " + idamUserAuthrizatoinUrl);
+           var userAuthToken;
+           const rp = require('request-promise');
+            var repo = await rp.post(idamUserAuthrizatoinUrl, {
+                form: {
+                    'grant_type': grantTypePassword,
+                    'password': userPassword,
+                    'username': userName,
+                    'scope': userScope,
+                    'client_id' : clientIdName,
+                    'client_secret' : clientSecretName
+                  },
+                  headers: {
+
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                  }
+            
+            }).then(res => {
+
+                console.log("res1:" + res)
+                console.log("response1:" + JSON.stringify(res))
+                userAuthToken = res;
+               })
+
+
+
+
+           console.log(JSON.stringify(userAuthToken))
+           
+           var responseNew = JSON.stringify(userAuthToken);
+           var extractAccessToken = JSON.parse(responseNew);
+           var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
+           console.log("userAuthrisationToken:" + userAuthrisationToken );
+
+      /*  Get the user authorization token  -ends here  test */
+
+   }
+
+
     for (let i = 0; i < messages.length; i++) {
         let msg = messages[i];
         let serviceCallbackUrl;
         let serviceName;
+     
         try {
             if (this.validateMessage(msg)) {
                 serviceCallbackUrl = msg.userProperties.serviceCallbackUrl;
@@ -87,13 +98,12 @@ module.exports = async function serviceCallbackFunction() {
                     json: true
                 }).then(token => {
                     console.log('S2S Token Retrieved.......');
-                    var serviceCallbackUrl1 = "http://cpo-case-payment-orders-api-demo.service.core-compute-demo.internal/case-payment-orders";
-                    const serviceResponse  = s2sRequest.post({
-                        uri: serviceCallbackUrl1,
+                    const serviceResponse  = s2sRequest.put({
+                        uri: serviceCallbackUrl,
                         headers: {
-                            Authorization: 'Bearer ' + userAuthrisationToken,
                             ServiceAuthorization: token,
-                            'Content-Type': 'application/json'
+                            Authorization: 'Bearer ' + userAuthrisationToken,
+                            'Content-Type': 'application/json' 
                         },
                         json: true,
                         body: msg.body
@@ -145,8 +155,7 @@ validateMessage = message => {
     if (!message.body) {
         console.log('No body received');
         return false;
-    } 
-    else {
+    } else {
         console.log('Received callback message: ', message.body);
     }
     if (!message.userProperties) {
