@@ -71,7 +71,7 @@ module.exports = async function serviceCallbackFunction() {
            var userAuthrisationToken= JSON.stringify(extractAccessToken.access_token)
            console.log("userAuthrisationToken:" + userAuthrisationToken );
 
-      /*  Get the user authorization token  -ends here   test */
+      /*  Get the user authorization token  -ends here  test */
 
    }
 
