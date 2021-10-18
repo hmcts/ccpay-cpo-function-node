@@ -1,6 +1,6 @@
 {
   "servicecallbackTopicName": "ccpay-cpo-topic",
-  "servicecallbackBusConnection": "test-fp.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=pQjwhM2tr42puH4zNwGBImegvQ8Tqbwwg0N5RBQKrqk=",
+  "servicecallbackBusConnection": "dummy",
   "servicecallbackSubscriptionName": "dummy",
   "processMessagesCount": 10,
   "appInsightsInstumentationKey": "dummy",
