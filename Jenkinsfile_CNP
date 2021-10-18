@@ -3,7 +3,7 @@
 @Library("Infrastructure")
 def type = "nodejs"
 def product = "ccpay"
-def component = "cpo-callback-function"
+def component = "callback-function"
 
 def secrets = [
         'ccpay-${env}': [

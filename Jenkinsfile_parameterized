@@ -10,7 +10,7 @@ properties([
 ])
 
 def product = "ccpay"
-def component = "cpo-callback-function"
+def component = "callback-function"
 def environment = params.ENVIRONMENT
 def subscription = 'sandbox'
 
