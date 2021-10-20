@@ -35,7 +35,6 @@ module.exports = async function serviceCallbackFunction() {
 
 
     else {
-
     
            console.log("idamUserAuthrizatoinUrl: " + idamUserAuthrizatoinUrl);
            var userAuthToken;
@@ -192,3 +191,4 @@ async function sendMessage(msg) {
             await sBusClient.close();
         })
 }
+//end
