@@ -10,5 +10,5 @@ appInsights.setup(config.get('appInsightsInstumentationKey'))
 appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.cloudRole] = 'ccpay-cpo-callback-function';
 appInsights.defaultClient.config.maxBatchSize = 0;
 serviceCallbackFunction().catch((err) => {
-   console.log("Error occurred: ", err);
+  console.log("Error occurred: ", err);
 });
