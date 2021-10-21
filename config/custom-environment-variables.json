@@ -1,6 +1,6 @@
 {
   "servicecallbackTopicName": "ccpay-cpo-topic",
-  "servicecallbackBusConnection": "cpo-topic-primary-send-listen-shared-access-key",
+  "servicecallbackBusConnection": "SERVICE_CALLBACK_BUS_CONNECTION",
   "servicecallbackSubscriptionName": "defaultServiceCallbackSubscription",
   "processMessagesCount": "10",
   "appInsightsInstumentationKey": "124e39c3-6dad-49ef-aede-d2cddac865c2",
