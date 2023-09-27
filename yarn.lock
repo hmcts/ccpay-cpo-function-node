@@ -44,7 +44,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@azure/core-auth@npm:^1.3.0":
+"@azure/core-auth@npm:1.3.0, @azure/core-auth@npm:^1.3.0":
   version: 1.3.0
   resolution: "@azure/core-auth@npm:1.3.0"
   dependencies:
@@ -1151,7 +1151,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ccpay-cpo-callback-function@workspace:."
   dependencies:
-    "@azure/core-auth": ^1.3.0
+    "@azure/core-auth": 1.3.0
     "@azure/service-bus": ^1.1.7
     "@hmcts/properties-volume": ^0.0.9
     applicationinsights: ^1.7.5
