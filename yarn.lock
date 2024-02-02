@@ -1345,7 +1345,7 @@ __metadata:
     applicationinsights: ^1.7.5
     body-parser: ^1.19.0
     chai: ^4.2.0
-    config: ^3.3.1
+    config: ^3.3.11
     debug: ^4.1.1
     eslint: ^7.32.0
     express: ^4.17.1
@@ -1556,12 +1556,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"config@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "config@npm:3.3.1"
+"config@npm:^3.3.11":
+  version: 3.3.11
+  resolution: "config@npm:3.3.11"
   dependencies:
-    json5: ^2.1.1
-  checksum: c5efac33a25253b8f7bf3f2fe27057a1ecd30f73c1990daf9e18647968cbf3710f289510f04f7d87d0531eeb220dce1c60767147e8663cfecb87152c9ae6fce7
+    json5: ^2.2.3
+  checksum: 84d783978ca7bf74bc6347868b6db29b853f5eda66021a04d77a84027b8b8b9d2fb5744409de5a39a5d63d867c3ac5f4169407701fa48f380015065b2701b221
   languageName: node
   linkType: hard
 
